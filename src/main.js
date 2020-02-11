@@ -9,7 +9,8 @@ import {
     SwipeItem,
     Tab,
     Tabs,
-    Lazyload
+    Lazyload,
+    List
 } from 'vant';
 
 Vue.use(Col);
@@ -19,6 +20,7 @@ Vue.use(SwipeItem);
 Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Lazyload);
+Vue.use(List);
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'

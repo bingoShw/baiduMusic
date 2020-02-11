@@ -4,7 +4,7 @@ import IndexLayout from './layout/IndexLayout.vue'
 Vue.use(VueRouter);
 
 import Home from './pages/Home.vue'
-import MoreMusicLayout from './layout/MoreMusicLayout.vue'
+import MoreMusic from './pages/MoreMusic.vue'
 
 const router = new VueRouter({
     routes:[
@@ -24,7 +24,7 @@ const router = new VueRouter({
                 },
                 {
                     path:'/index/moreMusic/:title/:type',
-                    component:MoreMusicLayout,
+                    component:MoreMusic,
                     name:'moreMusic'
                 }
             ]
