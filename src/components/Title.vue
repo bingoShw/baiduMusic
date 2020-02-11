@@ -12,7 +12,7 @@
     export default {
         data(){
             return{
-                url:'/index/MoreMusic'
+
             }
         },
         methods:{
@@ -27,7 +27,10 @@
                 type: String,
                 default: "音乐列表"
             },
-            url:[String,Object]
+            url:{
+                type:[String,Object],
+                default: "/index/MoreMusic"
+            }
         }
     }
 </script>

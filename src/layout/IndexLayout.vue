@@ -8,7 +8,7 @@
                 </router-link>
             </li>
             <li>
-                <router-link to>歌手</router-link>
+                <router-link to="/index/singerList">歌手</router-link>
             </li>
             <li>
                 <router-link to>榜单</router-link>

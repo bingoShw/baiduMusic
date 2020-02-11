@@ -10,7 +10,10 @@ import {
     Tab,
     Tabs,
     Lazyload,
-    List
+    List,
+    Cell,
+    CellGroup,
+    PullRefresh
 } from 'vant';
 
 Vue.use(Col);
@@ -21,6 +24,9 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Lazyload);
 Vue.use(List);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(PullRefresh);
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'

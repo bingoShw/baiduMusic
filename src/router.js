@@ -5,6 +5,8 @@ Vue.use(VueRouter);
 
 import Home from './pages/Home.vue'
 import MoreMusic from './pages/MoreMusic.vue'
+import SingerList from './pages/SingerList.vue'
+import SingerInformation from './pages/SingerInformation.vue'
 
 const router = new VueRouter({
     routes:[
@@ -15,17 +17,24 @@ const router = new VueRouter({
         {
             path:'/index',
             component:IndexLayout,
-            name:'index',
             children:[
                 {
                     path:'',
-                    component: Home,
-                    name:'home'
+                    component: Home
                 },
                 {
                     path:'/index/moreMusic/:title/:type',
                     component:MoreMusic,
                     name:'moreMusic'
+                },
+                {
+                    path:'singerList',
+                    component:SingerList
+                },
+                {
+                    path:'/index/singerList/singerInformation/:tinguid',
+                    component:SingerInformation,
+                    name:'singerInformation'
                 }
             ]
         }

@@ -31,7 +31,7 @@
         created() {
             //今日榜单
             Http.get(
-                    "api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=6&offset=0"
+                    "/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=6&offset=0"
             ).then(res=>{
                 // 拿到里面的数据
                 this.todayMusicList = res.song_list;

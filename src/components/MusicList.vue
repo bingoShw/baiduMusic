@@ -20,7 +20,7 @@
     export default {
         created(){
             // 渲染数据
-            const url = `api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.type}&size=${this.size}&offset=0`;
+            const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.type}&size=${this.size}&offset=0`;
             Http.get(url).then(res => {
                 // 拿到数据
                 this.list = res.song_list;
