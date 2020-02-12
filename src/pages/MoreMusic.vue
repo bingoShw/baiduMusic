@@ -9,7 +9,7 @@
                     @load="onLoad"
             >
                 <van-row gutter="10" class="moreMusicRow">
-                    <van-col span="12" class="moreMusicCol" v-for="item in list" :key="item.song_id">
+                    <van-col span="12" class="moreMusicCol" v-for="item in singerList" :key="item.song_id">
                         <img v-lazy="item.pic_big" alt="专辑封面">
                         <div class="musicName van-ellipsis">{{item.title}}</div>
                         <div class="singer">{{item.author}}</div>
@@ -21,21 +21,21 @@
 </template>
 
 <script>
-    import Http from '../api/http'
-    // import {getMusicMoreList} from '../api/Music-api'
+    // import Http from '../api/http'
+    import {getMusicMoreList} from '../api/Music-api'
     export default {
         created() {
-            const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.$route.params.type}&size=${this.size}&offset=${this.offset}`;
-            Http.get(url).then(res => {
-                this.list = res.song_list
-            })
-            // getMusicMoreList(this.$route.params.type, 12, 0).then(res => {
-            //     this.list = res.song_list;
-            // });
+            // const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.$route.params.type}&size=${this.size}&offset=${this.offset}`;
+            // Http.get(url).then(res => {
+            //     this.singerList = res.song_list
+            // })
+            getMusicMoreList(this.$route.params.type, 12, 0).then(res => {
+                this.singerList = res.song_list;
+            });
         },
         data(){
             return{
-                list:[],
+                singerList:[],
                 loading: false,
                 finished: false,
                 offset:0,
@@ -55,10 +55,9 @@
         methods:{
             onLoad(){
                 this.offset += 12;
-                const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.$route.params.type}&size=${this.size}&offset=${this.offset}`;
-                Http.get(url).then(res => {
+                getMusicMoreList(this.$route.params.type, 6, this.offset).then(res => {
                     if (res.song_list != null) {
-                        this.list = this.list.concat(res.song_list);
+                        this.singerList = this.singerList.concat(res.song_list);
                         this.loading = false;
                     } else {
                         this.finished = true;
@@ -68,9 +67,8 @@
             },
             onRefresh() {
                 this.offset = 0;
-                const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&type=${this.$route.params.type}&size=${this.size}&offset=${this.offset}`;
-                Http.get(url).then(res => {
-                    this.list = res.song_list;
+                getMusicMoreList(this.$route.params.type, 12, 0).then(res => {
+                    this.singerList = res.song_list;
                     this.isLoading = false
                 })
             }

@@ -1,28 +1,32 @@
 <template>
     <div>
         <div class="singerPic">
-            <img  class="singerBigPic" src="https://tse1-mm.cn.bing.net/th/id/OIP.--6OM57e00uNILQ7ktbyuwHaEo?w=299&h=186&c=7&o=5&dpr=1.5&pid=1.7" alt="">
+            <img  class="singerBigPic" :src="singerInfo.avatar_middle" alt="">
             <div class="singerBox">
-                <img class="singerSmallPic" src="https://tse1-mm.cn.bing.net/th/id/OIP.--6OM57e00uNILQ7ktbyuwHaEo?w=299&h=186&c=7&o=5&dpr=1.5&pid=1.7">
-                <span>王嘉尔</span>
+                <img class="singerSmallPic" :src="singerInfo.avatar_middle">
+                <span>{{singerInfo.name}}</span>
             </div>
         </div>
-        <van-cell v-for="item in list" :key="item.song_id" value="内容" />
+        <van-cell v-for="item in songList" :key="item.song_id">
+            {{item.title}}
+        </van-cell>
     </div>
 </template>
 
 <script>
-    import Http from '../api/http'
+    // import Http from '../api/http'
+    import {getSingerMusic} from '../api/Music-api'
     export default {
         created() {
-            const url = '/api/v1/restserver/ting?method=baidu.ting.artist.getInfo&tinguid=239544459';
-            Http.get(url).then(res => {
-                this.list = res.song_list
-            })
+            getSingerMusic(this.$route.params.tinguid,12).then(res => {
+                this.singerInfo = res.artistinfo;
+                this.songList = res.songlist;
+            });
         },
         data(){
             return{
-                list:[]
+                singerInfo:{},
+                songList:[]
             }
         }
     }

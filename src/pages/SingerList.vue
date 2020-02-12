@@ -34,8 +34,8 @@
     ];
     export default {
         created() {
-            for (let item of SingerIdList) {
-                getSingerList(item).then(res => {
+            for (let singerId of SingerIdList) {
+                getSingerList(singerId).then(res => {
                     this.list.push(res);
                 });
             }

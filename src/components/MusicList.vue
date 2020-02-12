@@ -5,10 +5,12 @@
             <Title :title="title" :url="{name:'moreMusic',params:{title:title,type:type}}"></Title>
             <!-- 音乐列表 -->
             <van-row class="musicList" gutter="10">
-                <van-col class="musicCol" v-for="item in list" span="8" :key="item.song_id">
-                    <img class="musicCover" v-lazy="item.pic_small" alt="图片封面" />
-                    <div class="musicName van-ellipsis">{{item.title}}</div>
-                </van-col>
+                <router-link tag="div" to="/musicPlay">
+                    <van-col class="musicCol" v-for="item in list" span="8" :key="item.song_id">
+                        <img class="musicCover" v-lazy="item.pic_small" alt="图片封面" />
+                        <div class="musicName van-ellipsis">{{item.title}}</div>
+                    </van-col>
+                </router-link>
             </van-row>
         </div>
     </div>

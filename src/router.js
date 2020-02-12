@@ -7,6 +7,9 @@ import Home from './pages/Home.vue'
 import MoreMusic from './pages/MoreMusic.vue'
 import SingerList from './pages/SingerList.vue'
 import SingerInformation from './pages/SingerInformation.vue'
+import Search from './pages/Search.vue'
+import MusicMoreList from './pages/MusicMoreList.vue'
+import MusicPlay from './pages/MusicPlay.vue'
 
 const router = new VueRouter({
     routes:[
@@ -35,8 +38,20 @@ const router = new VueRouter({
                     path:'/index/singerList/singerInformation/:tinguid',
                     component:SingerInformation,
                     name:'singerInformation'
+                },
+                {
+                    path:'search',
+                    component:Search
+                },
+                {
+                    path:'musicMoreList',
+                    component:MusicMoreList
                 }
             ]
+        },
+        {
+            path:'/musicPlay',
+            component:MusicPlay
         }
     ]
 });

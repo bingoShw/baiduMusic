@@ -11,13 +11,13 @@
                 <router-link to="/index/singerList">歌手</router-link>
             </li>
             <li>
-                <router-link to>榜单</router-link>
+                <router-link to="/index/musicMoreList">榜单</router-link>
             </li>
             <li>
                 <router-link to>我的</router-link>
             </li>
             <li>
-                <router-link to>搜索</router-link>
+                <router-link to="/index/search">搜索</router-link>
             </li>
         </ul>
         <!-- Home页面 -->
