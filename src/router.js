@@ -51,7 +51,8 @@ const router = new VueRouter({
         },
         {
             path:'/musicPlay',
-            component:MusicPlay
+            component:MusicPlay,
+            name:'musicPlay'
         }
     ]
 });

@@ -8,27 +8,36 @@
                         placeholder="请输入搜索关键词"
                         background="#e9e9e9"
                         shape="round"
+                        @search="onSearch"
                 >
-                    <div slot="action" @click="onSearch(val)">搜索</div>
+                    <div slot="action" @click="onSearch(value)">搜索</div>
                 </van-search>
+            </div>
+            <div class="searchResult">
+                <van-cell v-for="(item,index) in songList" :key="item.index">{{item.songname}}</van-cell>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
-    data(){
-        return{
-            value:''
-        }
-    },
-    methods:{
-        onSearch(val){
+    import {Search} from "../api/Music-api";
 
+    export default {
+        data(){
+            return{
+                value:'',
+                songList:[]
+            }
+        },
+        methods:{
+            onSearch(value){
+                Search(value).then(res => {
+                    this.songList = res.song
+                })
+            }
         }
     }
-}
 </script>
 
 <style lang="less" scoped>

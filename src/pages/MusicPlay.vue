@@ -3,7 +3,9 @@
         <div class="box">
 <!--            标题-->
             <div class="top">
-                <van-icon name="wap-home-o" size="40" color="red"/>
+                <router-link tag="div" to="/index">
+                    <van-icon name="wap-home-o" size="40" color="red"/>
+                </router-link>
                 <ul>
                     <li class="songName">歌名</li>
                     <li class="singerName">歌手</li>
