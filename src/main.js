@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue'
 import router from './router'
 
+
 import {
     Col,
     Row,
@@ -15,7 +16,10 @@ import {
     CellGroup,
     PullRefresh,
     Search,
-    Icon
+    Icon,
+    Notify,
+    Dialog,
+    Tag
 } from 'vant';
 
 Vue.use(Col);
@@ -31,17 +35,20 @@ Vue.use(CellGroup);
 Vue.use(PullRefresh);
 Vue.use(Search);
 Vue.use(Icon);
-
-import Vuex from 'vuex'
-Vue.use(Vuex)
+Vue.use(Notify);
+Vue.use(Dialog);
+Vue.use(Tag);
 
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios);
+
+import  store from './store/index'
 const vm = new Vue({
     el: '#app',
     render(createElement) {
         return createElement(App);
     },
-    router
+    router,
+    store
 });

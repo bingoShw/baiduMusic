@@ -16,6 +16,17 @@
             <div class="searchResult">
                 <van-cell v-for="(item,index) in songList" :key="item.index">{{item.songname}}</van-cell>
             </div>
+            <div class="searchHistory" v-show="historyShow">
+                <van-tag
+                        v-if="show.primary"
+                        closeable
+                        size="medium"
+                        plain
+                        @close="close('primary')"
+                >
+                    标签
+                </van-tag>
+            </div>
         </div>
     </div>
 </template>
@@ -24,10 +35,20 @@
     import {Search} from "../api/Music-api";
 
     export default {
+        created() {
+            const HistoryMusic = localStorage.getItem("seachMusic") || "[]";
+            this.historyList = JSON.parse(HistoryMusic);
+        },
         data(){
             return{
                 value:'',
-                songList:[]
+                songList:[],
+                historyList :[],
+                historyShow:true,
+                show: {
+                    primary: true,
+                    success: true
+                }
             }
         },
         methods:{
@@ -35,6 +56,9 @@
                 Search(value).then(res => {
                     this.songList = res.song
                 })
+            },
+            close(type) {
+                this.show[type] = false;
             }
         }
     }
@@ -48,6 +72,9 @@
     background-color: #e9e9e9;
     .searchBox {
         border-bottom: 1px solid #c0c0c0;
+    }
+    .searchHistory {
+        margin: 0 20px;
     }
 }
 </style>

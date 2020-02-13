@@ -5,12 +5,12 @@
             <Title :title="title" :url="{name:'moreMusic',params:{title:title,type:type}}"></Title>
             <!-- 音乐列表 -->
             <van-row class="musicList" gutter="10">
-                <router-link tag="div" to="/musicPlay">
-                    <van-col class="musicCol" v-for="item in list" span="8" :key="item.song_id">
+                <van-col class="musicCol" v-for="item in list" span="8" :key="item.song_id">
+                    <router-link tag="div" :to="{name:'musicPlay',params:{songId:item.song_id}}">
                         <img class="musicCover" v-lazy="item.pic_small" alt="图片封面" />
                         <div class="musicName van-ellipsis">{{item.title}}</div>
-                    </van-col>
-                </router-link>
+                    </router-link>
+                </van-col>
             </van-row>
         </div>
     </div>
@@ -19,6 +19,7 @@
 <script>
     import Http from '../api/http'
     import Title from '../components/Title.vue'
+    import { mapState } from 'vuex';
     export default {
         created(){
             // 渲染数据

@@ -23,9 +23,23 @@ function Search(query=""){
     const url = `/api/v1/restserver/ting?method=baidu.ting.search.catalogSug&query=${query}`;
     return Http.get(url)
 }
+
+//播放
+function getMusicPlay(songid) {
+    const url = `/api/v1/restserver/ting?method=baidu.ting.song.play&songid=${songid}`;
+    return Http.get(url)
+}
+
+//得到歌词
+function GetLrc(songid){
+    const url = `/api/v1/restserver/ting?method=baidu.ting.song.lry&songid=${songid}`;
+    return Http.get(url)
+}
 export {
     getMusicMoreList,
     getSingerList,
     getSingerMusic,
-    Search
+    Search,
+    getMusicPlay,
+    GetLrc
 }
