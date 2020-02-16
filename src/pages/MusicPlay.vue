@@ -28,7 +28,7 @@
             </div>
             <!--            进度条-->
             <div class="play">
-                <audio controls :src="bitrate.show_link"></audio>
+                <audio ref="audio" controls :src="bitrate.show_link"></audio>
             </div>
         </div>
     </div>
@@ -38,6 +38,7 @@
     import {getMusicPlay} from '../api/Music-api'
     import {mapState} from 'vuex'
     import {GETMUSICINFO} from '../store/mutation_type'
+    import {CURRENTTIME} from '../store/mutation_type'
     import Lrc from '../components/Lrc.vue'
     export default {
         created(){
@@ -46,12 +47,14 @@
                     songInfo: res.songinfo,
                     bitrate: res.bitrate
                 });
+                this.$refs.audio.addEventListener('timeupdate',this.GetTime)
             });
         },
         computed: {
             ...mapState({
                 songInfo: 'songInfo',
                 bitrate:'bitrate',
+                progress:'progress'
             })
         },
         components:{
@@ -77,8 +80,19 @@
                 }).catch(()=>{
                     this.ifLike = false
                 });
+            },
+            GetTime(){
+                this.$store.commit(CURRENTTIME,{currentTime:this.$refs.audio.currentTime})
             }
-        }
+        },
+        watch: {
+            progress(){
+                this.$refs.audio.currentTime = this.progress;
+            }
+        },
+        beforeDestroy() {
+            this.$refs.audio.removeEventListener('timeupdate',this.GetTime)
+        },
     }
 </script>
 

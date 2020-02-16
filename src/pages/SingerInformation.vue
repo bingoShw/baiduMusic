@@ -50,7 +50,7 @@
         .singerBigPic {
             width: 100%;
             height: 100%;
-            filter: blur(5px) grayscale(50%);
+            filter: blur(5px) grayscale(50%) opacity(40%);
         }
         .singerSmallPic {
             width: 100%;

@@ -19,7 +19,6 @@
 <script>
     import Http from '../api/http'
     import Title from '../components/Title.vue'
-    import { mapState } from 'vuex';
     export default {
         created(){
             // 渲染数据

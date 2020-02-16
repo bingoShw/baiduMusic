@@ -10,6 +10,8 @@ import SingerInformation from './pages/SingerInformation.vue'
 import Search from './pages/Search.vue'
 import MusicMoreList from './pages/MusicMoreList.vue'
 import MusicPlay from './pages/MusicPlay.vue'
+import Me from './pages/Me.vue'
+import MusicMoreListInfo from './pages/MusicMoreListInfo.vue'
 
 const router = new VueRouter({
     routes:[
@@ -20,6 +22,9 @@ const router = new VueRouter({
         {
             path:'/index',
             component:IndexLayout,
+            meta:{
+                title:'天亮音乐'
+            },
             children:[
                 {
                     path:'',
@@ -32,7 +37,10 @@ const router = new VueRouter({
                 },
                 {
                     path:'singerList',
-                    component:SingerList
+                    component:SingerList,
+                    meta:{
+                        title:'歌手'
+                    }
                 },
                 {
                     path:'/index/singerList/singerInformation/:tinguid',
@@ -41,11 +49,24 @@ const router = new VueRouter({
                 },
                 {
                     path:'search',
-                    component:Search
+                    component:Search,
+                    meta:{
+                        title:'搜索'
+                    }
                 },
                 {
                     path:'musicMoreList',
-                    component:MusicMoreList
+                    component:MusicMoreList,
+                    meta:{
+                        title:'榜单'
+                    }
+                },
+                {
+                    path:'me',
+                    component:Me,
+                    meta:{
+                        title:'我的'
+                    }
                 }
             ]
         },
@@ -53,6 +74,11 @@ const router = new VueRouter({
             path:'/musicPlay/:songId',
             component:MusicPlay,
             name:'musicPlay'
+        },
+        {
+            path:'/index/musicMoreListInfo/:type',
+            component:MusicMoreListInfo,
+            name:'musicMoreListInfo'
         }
     ]
 });

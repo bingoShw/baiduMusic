@@ -35,11 +35,18 @@ function GetLrc(songid){
     const url = `/api/v1/restserver/ting?method=baidu.ting.song.lry&songid=${songid}`;
     return Http.get(url)
 }
+
+//榜单
+function MusicMoreList(type,size){
+    const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&format=json&type=${type}&size=${size}&offset=0`
+    return Http.get(url)
+}
 export {
     getMusicMoreList,
     getSingerList,
     getSingerMusic,
     Search,
     getMusicPlay,
-    GetLrc
+    GetLrc,
+    MusicMoreList
 }

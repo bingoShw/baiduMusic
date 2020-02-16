@@ -9,22 +9,27 @@
                         background="#e9e9e9"
                         shape="round"
                         @search="onSearch"
+                        @clear="clear"
                 >
                     <div slot="action" @click="onSearch(value)">搜索</div>
                 </van-search>
             </div>
+            <!--            搜索结果-->
             <div class="searchResult">
-                <van-cell v-for="(item,index) in songList" :key="item.index">{{item.songname}}</van-cell>
+                <van-cell v-for="(item,index) in songList" :key="index">{{item.songname}}</van-cell>
             </div>
+            <!--            搜索记录-->
             <div class="searchHistory" v-show="historyShow">
                 <van-tag
-                        v-if="show.primary"
+                        v-for="(item,index) in searchHistoryList"
+                        :key="index"
                         closeable
-                        size="medium"
+                        size="large"
                         plain
-                        @close="close('primary')"
+                        @close="close(index)"
+                        @click="toSearch(item)"
                 >
-                    标签
+                    {{item}}
                 </van-tag>
             </div>
         </div>
@@ -36,45 +41,70 @@
 
     export default {
         created() {
-            const HistoryMusic = localStorage.getItem("seachMusic") || "[]";
-            this.historyList = JSON.parse(HistoryMusic);
+            //localStorage获取数据 searchHistory为key值
+            const searchHistoryStr = localStorage.getItem('searchHistory') || '[]';
+            // debugger
+            //JSON.parse() 方法将数据转换为 JavaScript 对象
+            this.searchHistoryList = JSON.parse(searchHistoryStr);
         },
         data(){
             return{
                 value:'',
                 songList:[],
-                historyList :[],
+                searchHistoryList:[],
                 historyShow:true,
-                show: {
-                    primary: true,
-                    success: true
-                }
             }
         },
         methods:{
-            onSearch(value){
-                Search(value).then(res => {
-                    this.songList = res.song
-                })
+            toSearch(item) {
+                this.value = item;
+                this.onSearch();
             },
-            close(type) {
-                this.show[type] = false;
+            clear() {
+                this.historyShow = true;
+                this.songList = [];
+            },
+            onSearch(value){
+                if (this.value == ""){
+                    return
+                }else{
+                    Search(value).then(res => {
+                        if (res.song != null || res.song.length != 0) {
+                            this.historyShow = false;
+                        }
+                        this.songList = res.song;
+                    });
+                }
+                //判断重复
+                const searchHistoryStr = localStorage.getItem("searchHistory") || "[]";
+                const searchHistoryList = JSON.parse(searchHistoryStr);
+                if (!searchHistoryList.includes(this.value)) {
+                    searchHistoryList.push(this.value);
+                }else {
+                    this.searchHistoryList = searchHistoryList;
+                }
+                //JSON.stringify() 方法将 JavaScript 对象转换为字符串
+                localStorage.setItem("searchHistory", JSON.stringify(searchHistoryList));
+            },
+            close(index) {
+                this.searchHistoryList.splice(index, 1);
+                localStorage.setItem("searchHistory", JSON.stringify(this.searchHistoryList));
             }
         }
     }
 </script>
 
 <style lang="less" scoped>
-.topBox {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: #e9e9e9;
-    .searchBox {
-        border-bottom: 1px solid #c0c0c0;
+    .topBox {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-color: #e9e9e9;
+        .searchBox {
+            border-bottom: 1px solid #c0c0c0;
+        }
+        .searchHistory {
+            margin: 0 20px;
+        }
     }
-    .searchHistory {
-        margin: 0 20px;
-    }
-}
 </style>

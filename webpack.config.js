@@ -13,7 +13,7 @@ module.exports = {
         // 相当于脚本里 --open --contentBase src --port 3000 --hot",
         open: true,
         contentBase: 'src',
-        port: 3030,
+        port: 1213,
         hot: true,
         // 配置代理
         proxy:{

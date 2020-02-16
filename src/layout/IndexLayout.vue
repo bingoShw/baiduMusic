@@ -14,7 +14,7 @@
                 <router-link to="/index/musicMoreList">榜单</router-link>
             </li>
             <li>
-                <router-link to>我的</router-link>
+                <router-link to="/index/me">我的</router-link>
             </li>
             <li>
                 <router-link to="/index/search">搜索</router-link>
@@ -29,12 +29,25 @@
 <script>
     export default {
         data(){
-            return{}
-        }
+            return{
+            }
+        },
+        watch: {
+            $route(){
+                if(this.$route.meta.title){
+                    document.title = this.$route.meta.title
+                }else{
+                    document.title = "天亮音乐"
+                }
+            }
+        },
     };
 </script>
 
 <style lang="less" scoped>
+    .router-link-active {
+        color: red !important;
+    }
     .index-container {
         ul {
             display: flex;

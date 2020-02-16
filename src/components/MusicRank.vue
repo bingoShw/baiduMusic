@@ -38,6 +38,7 @@ import MusicRankList from '../components/MusicRankList.vue'
         padding: 10px;
     }
     // 可以通过/deep/ 或者 ::v-deep虽然scoped限制了作用域，还可以覆盖子组件的样式
+    //后面跟的是要覆盖的样式
     /deep/ .van-tab__text {
         font-size: 14px;
     }
