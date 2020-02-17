@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import {Search} from "../api/Music-api";
+    import {search} from "../api/Music-api";
 
     export default {
         created() {
@@ -68,7 +68,7 @@
                 if (this.value == ""){
                     return
                 }else{
-                    Search(value).then(res => {
+                    search(value).then(res => {
                         if (res.song != null || res.song.length != 0) {
                             this.historyShow = false;
                         }

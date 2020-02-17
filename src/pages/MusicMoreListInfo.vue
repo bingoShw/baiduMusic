@@ -1,5 +1,6 @@
 <template>
     <div>
+        <van-icon name="arrow-left" class="back" size="30" color="#fff" @click="goBack"/>
         <div>
             <img :src="musicPic.pic_s444" alt="">
         </div>
@@ -12,10 +13,10 @@
     </div>
 </template>
 <script>
-    import {MusicMoreList} from '../api/Music-api'
+    import {musicMoreList} from '../api/Music-api'
     export default {
         created() {
-            MusicMoreList(this.$route.params.type,8).then(res=>{
+            musicMoreList(this.$route.params.type,8).then(res=>{
                 this.musicPic = res.billboard;
                 this.musicList = res.song_list
             })
@@ -24,6 +25,11 @@
             return {
                 musicPic:{},
                 musicList:[]
+            }
+        },
+        methods:{
+            goBack(){
+                this.$router.back()
             }
         }
     }
@@ -41,5 +47,10 @@
             color: #999999;
             font-size: 14px;
         }
+    }
+    .back {
+        position: fixed;
+        left: 10px;
+        top: 20px;
     }
 </style>

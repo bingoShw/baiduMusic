@@ -14,12 +14,12 @@
 </template>
 
 <script>
-    import {GetLrc} from '../api/Music-api'
+    import {getLrc} from '../api/Music-api'
     import {mapState} from "vuex"
     import {PROGRESS} from '../store/mutation_type'
     export default {
         created() {
-            GetLrc(this.songId).then(res => {
+            getLrc(this.songId).then(res => {
                 this.lrcContent = res.lrcContent;
                 //拿到歌词数据
                 console.log(this.lrcContent);

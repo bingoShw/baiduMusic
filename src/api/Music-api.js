@@ -19,7 +19,7 @@ function getSingerMusic(tinguid,limits = 12) {
 }
 
 //搜索
-function Search(query=""){
+function search(query=""){
     const url = `/api/v1/restserver/ting?method=baidu.ting.search.catalogSug&query=${query}`;
     return Http.get(url)
 }
@@ -31,13 +31,13 @@ function getMusicPlay(songid) {
 }
 
 //得到歌词
-function GetLrc(songid){
+function getLrc(songid){
     const url = `/api/v1/restserver/ting?method=baidu.ting.song.lry&songid=${songid}`;
     return Http.get(url)
 }
 
 //榜单
-function MusicMoreList(type,size){
+function musicMoreList(type,size){
     const url = `/api/v1/restserver/ting?method=baidu.ting.billboard.billList&format=json&type=${type}&size=${size}&offset=0`
     return Http.get(url)
 }
@@ -45,8 +45,8 @@ export {
     getMusicMoreList,
     getSingerList,
     getSingerMusic,
-    Search,
+    search,
     getMusicPlay,
-    GetLrc,
-    MusicMoreList
+    getLrc,
+    musicMoreList
 }

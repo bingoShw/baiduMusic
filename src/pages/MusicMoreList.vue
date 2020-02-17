@@ -1,64 +1,52 @@
 <template>
     <div>
-        <router-link tag="div" :to="{name:'musicMoreListInfo',params:{type:item.billboard.billboard_type}}" class="listContent" v-for="item in musicList" :key="item.billboard.billboard_no">
+        <router-link tag="div" class="listContent" :to="{name:'musicMoreListInfo',params:{type:item.billboard.billboard_type}}" v-for="item in musicList" :key="item.billboard.billboard_no">
             <div class="listPic">
                 <img :src="item.billboard.pic_s192" alt="新歌榜">
             </div>
             <div class="listMusic">
                 <ul v-for="(items,index) in item.song_list" :key="index">
-                    <li>{{index+1}}&nbsp;&nbsp;&nbsp;<span>{{items.title}}</span></li>
+                    <li>{{index + 1}}&nbsp;&nbsp;&nbsp;<span>{{items.title}}</span></li>
                 </ul>
             </div>
         </router-link>
     </div>
-<!--    <div>-->
-<!--        <router-link tag="div" class="group" to="/index/musicMoreListInfo">-->
-<!--            <div class="groupPic">-->
-<!--                <img src="https://tse2-mm.cn.bing.net/th/id/OIP.xFOavv6Eph6HNZz8d131_gHaEo?w=200&h=125&c=7&o=5&dpr=1.5&pid=1.7">-->
-<!--            </div>-->
-<!--            <div class="groupMusic">-->
-<!--                <ul>-->
-<!--                    <li v-for="num in 3" :key="num">{{num}}</li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </router-link>-->
-<!--    </div>-->
 </template>
 
 <script>
-  import {MusicMoreList} from '../api/Music-api'
+  import {musicMoreList} from '../api/Music-api'
   export default {
       created(){
           //新歌榜
-              MusicMoreList(1,3).then(res => {
+          musicMoreList(1,3).then(res => {
                   this.musicList.push({
                       billboard:res.billboard,
                       song_list:res.song_list
                   })
               }),
                   //热歌榜
-              MusicMoreList(2,3).then(res => {
+              musicMoreList(2,3).then(res => {
                   this.musicList.push({
                       billboard:res.billboard,
                       song_list:res.song_list
                   })
               }),
                   //欧美金曲
-              MusicMoreList(11,3).then(res => {
+              musicMoreList(11,3).then(res => {
                   this.musicList.push({
                       billboard:res.billboard,
                       song_list:res.song_list
                   })
               }),
                   //摇滚
-              MusicMoreList(21,3).then(res => {
+              musicMoreList(21,3).then(res => {
                   this.musicList.push({
                       billboard:res.billboard,
                       song_list:res.song_list
                   })
               }),
                   //经典老歌
-              MusicMoreList(22,3).then(res => {
+              musicMoreList(22,3).then(res => {
                   this.musicList.push({
                       billboard:res.billboard,
                       song_list:res.song_list
@@ -96,10 +84,11 @@
                 width: 100%;
                 height: 30px;
                 line-height: 30px;
-               font-weight: bold;
-               color: red;
+                font-weight: bold;
+                color: red;
                 font-size: 15px;
                 overflow: hidden;
+                font-style: italic;
                 span {
                     color: black;
                     font-weight: normal;
@@ -108,13 +97,4 @@
             }
         }
     }
-    /*.group {*/
-    /*    display: flex;*/
-    /*    .groupPic {*/
-    /*        img {*/
-    /*            width: 150px;*/
-    /*            height: 150px;*/
-    /*        }*/
-    /*    }*/
-    /*}*/
 </style>
